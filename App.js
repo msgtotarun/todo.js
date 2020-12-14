@@ -13,6 +13,10 @@ import Constants from "expo-constants";
 import DatePicker from "react-native-datepicker";
 
 let id = 0;
+var date = new Date().getDate();
+  var month = new Date().getMonth() + 1;
+  var year = new Date().getFullYear();
+  let mindate= date+'-'+month+'-'+year
 
 const Todo = (props) => (
   <View style={styles.todoContainer}>
@@ -40,6 +44,7 @@ export default class App extends React.Component {
       todos: [],
       text: "",
       dueDate: "",
+      mindate: mindate
     };
   }
 
@@ -56,7 +61,6 @@ export default class App extends React.Component {
       });
     }
   }
-
   takeInput = (input) => {
     this.setState({ text: input });
   };
@@ -86,6 +90,7 @@ export default class App extends React.Component {
   }
 
   render() {
+    
     return (
       <View style={[styles.appContainer, styles.fill]}>
         <Text style={[styles.heading]}>ToDo List</Text>
@@ -104,7 +109,7 @@ export default class App extends React.Component {
             mode="date"
             placeholder="select date"
             format="DD-MM-YYYY"
-            minDate="01-01-2020"
+            minDate={this.state.mindate}
             maxDate="01-01-2100"
             confirmBtnText="Confirm"
             cancelBtnText="Cancel"
